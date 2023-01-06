@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<ctype.h>
+#include<string.h>
+int intStack[25];
+int intTop=-1;
+void pushInt(int item)
+{
+ intStack[++intTop]=item;
+}
+int popInt()
+{
+ return intStack[intTop--];
+}
+int evaluate(char *prefix)
+{
+ char ch; int i,
+operand1, operand2;
+ for(i=strlen(prefix)-1; i>-1; i--)
+ {
+ch=prefix[i];
+if(isdigit(ch))
+ {
+ pushInt(ch-'0');
+ }
+else
+ {
+ operand1 = popInt();
+operand2 = popInt();
+switch(ch) {
+case '+':
+ pushInt(operand1+operand2);
+ break;
+case '-':
+ pushInt(operand1-operand2);
+ break;
+case '*':
+ pushInt(operand1*operand2);
+ break;
+case '/':
+ pushInt(operand1/operand2);
+ break;
+case '^':
+ pushInt(operand1^operand2);
+ break;
+ }
+ }
+ }
+
+ return intStack[intTop];
+}
+void main() { char prefix[]="*+526";
+printf("Postfix expression is: %s\n", prefix);
+printf("Evaluated value is: %d\n", evaluate(prefix));
+}
