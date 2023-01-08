@@ -49,6 +49,6 @@ case '^':
  return intStack[intTop];
 }
 void main() { char prefix[]="*+526";
-printf("Postfix expression is: %s\n", prefix);
+printf("Prefix expression is: %s\n", prefix);
 printf("Evaluated value is: %d\n", evaluate(prefix));
 }
